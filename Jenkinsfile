@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_HUB_CREDENTIALS = credentials('docker-hub-credentials') // Use your credential ID
         DOCKER_IMAGE_NAME = 'matishaikh77/mlops-assignment-1'
     }
 
@@ -11,20 +10,20 @@ pipeline {
             steps {
                 script {
                     // Build the Docker image
-                    docker.build("${DOCKER_IMAGE_NAME}:${env.BUILD_ID}")
+                    sh "docker build -t ${DOCKER_IMAGE_NAME}:${env.BUILD_ID} ."
                 }
             }
         }
 
         stage('Push Docker Image') {
             steps {
-                script {
-                    // Log in to Docker Hub
-                    sh "echo ${DOCKER_HUB_CREDENTIALS_PSW} | docker login -u ${DOCKER_HUB_CREDENTIALS_USR} --password-stdin"
+                withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_HUB_USR', passwordVariable: 'DOCKER_HUB_PSW')]) {
+                    script {
+                        // Log in to Docker Hub
+                        sh "echo ${DOCKER_HUB_PSW} | docker login -u ${DOCKER_HUB_USR} --password-stdin"
 
-                    // Push the Docker image
-                    docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-                        docker.image("${DOCKER_IMAGE_NAME}:${env.BUILD_ID}").push()
+                        // Push the Docker image
+                        sh "docker push ${DOCKER_IMAGE_NAME}:${env.BUILD_ID}"
                     }
                 }
             }
