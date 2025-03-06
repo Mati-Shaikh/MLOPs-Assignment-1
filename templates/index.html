@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Price Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Car Price Prediction</h1>
+
+        <!-- Form to Add a New Car -->
+        <div class="form-container">
+            <h2>Add a New Car</h2>
+            <form id="addCarForm">
+                <label for="brand">Brand:</label>
+                <input type="text" id="brand" name="Brand" required>
+
+                <label for="model">Model:</label>
+                <input type="text" id="model" name="Model" required>
+
+                <label for="year">Year:</label>
+                <input type="number" id="year" name="Year" required>
+
+                <label for="engineSize">Engine Size:</label>
+                <input type="number" step="0.1" id="engineSize" name="Engine_Size" required>
+
+                <label for="fuelType">Fuel Type:</label>
+                <input type="text" id="fuelType" name="Fuel_Type" required>
+
+                <label for="transmission">Transmission:</label>
+                <input type="text" id="transmission" name="Transmission" required>
+
+                <label for="mileage">Mileage:</label>
+                <input type="number" id="mileage" name="Mileage" required>
+
+                <label for="doors">Doors:</label>
+                <input type="number" id="doors" name="Doors" required>
+
+                <label for="ownerCount">Owner Count:</label>
+                <input type="number" id="ownerCount" name="Owner_Count" required>
+
+                <button type="submit">Add Car</button>
+            </form>
+            <p id="addCarResponse"></p>
+        </div>
+
+        <!-- Form to Predict Car Price -->
+        <div class="form-container">
+            <h2>Predict Car Price</h2>
+            <form id="predictPriceForm">
+                <label for="predictBrand">Brand:</label>
+                <input type="text" id="predictBrand" name="Brand" required>
+
+                <label for="predictModel">Model:</label>
+                <input type="text" id="predictModel" name="Model" required>
+
+                <label for="predictYear">Year:</label>
+                <input type="number" id="predictYear" name="Year" required>
+
+                <label for="predictEngineSize">Engine Size:</label>
+                <input type="number" step="0.1" id="predictEngineSize" name="Engine_Size" required>
+
+                <label for="predictFuelType">Fuel Type:</label>
+                <input type="text" id="predictFuelType" name="Fuel_Type" required>
+
+                <label for="predictTransmission">Transmission:</label>
+                <input type="text" id="predictTransmission" name="Transmission" required>
+
+                <label for="predictMileage">Mileage:</label>
+                <input type="number" id="predictMileage" name="Mileage" required>
+
+                <label for="predictDoors">Doors:</label>
+                <input type="number" id="predictDoors" name="Doors" required>
+
+                <label for="predictOwnerCount">Owner Count:</label>
+                <input type="number" id="predictOwnerCount" name="Owner_Count" required>
+
+                <button type="submit">Predict Price</button>
+            </form>
+            <p id="predictPriceResponse"></p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
