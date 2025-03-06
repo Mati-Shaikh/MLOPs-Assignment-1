@@ -20,7 +20,14 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install pytest requests joblib scikit-learn
+          pip install pytest requests numpy joblib scikit-learn
+          pip install "werkzeug<3.0"
+     
+      - name: Fix NumPy Import Issue
+        run: |
+          pip uninstall -y numpy
+          pip install --no-cache-dir numpy
+
 
       - name: Run unit tests
         run: |
