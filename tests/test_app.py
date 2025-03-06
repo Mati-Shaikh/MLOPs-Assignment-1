@@ -1,11 +1,13 @@
 import pytest
 from app import app  # Import your Flask app
 
+
 @pytest.fixture
 def client():
     # Create a test client for the Flask app
     with app.test_client() as client:
         yield client
+
 
 def test_predict_endpoint(client):
     # Test data
@@ -31,3 +33,5 @@ def test_predict_endpoint(client):
     response_data = response.get_json()
     assert "predicted_price" in response_data
     assert isinstance(response_data["predicted_price"], float)
+
+# Add a newline at the end of the file
