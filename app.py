@@ -8,7 +8,7 @@ app = Flask(__name__)
 # Load the dataset
 df = pd.read_csv('car_price_dataset.csv')
 
-# Load the trained model
+# Load the trained model by using .csv
 model = joblib.load('car_price_model.pkl')
 
 # Home route
