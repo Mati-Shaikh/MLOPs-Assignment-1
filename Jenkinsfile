@@ -11,7 +11,7 @@ pipeline {
             steps {
                 script {
                     // Build the Docker image
-                    docker.build("${DOCKER_IMAGE_NAME}:${env.BUILD_ID}")
+                    sh "docker build -t ${DOCKER_IMAGE_NAME}:${env.BUILD_ID} ."
                 }
             }
         }
@@ -23,9 +23,7 @@ pipeline {
                     sh "echo ${DOCKER_HUB_CREDENTIALS_PSW} | docker login -u ${DOCKER_HUB_CREDENTIALS_USR} --password-stdin"
 
                     // Push the Docker image
-                    docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-                        docker.image("${DOCKER_IMAGE_NAME}:${env.BUILD_ID}").push()
-                    }
+                    sh "docker push ${DOCKER_IMAGE_NAME}:${env.BUILD_ID}"
                 }
             }
         }
