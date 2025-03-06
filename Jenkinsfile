@@ -16,18 +16,15 @@ pipeline {
             }
         }
 
-        stage('Push Docker Image') {
-            steps {
-                withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_HUB_USR', passwordVariable: 'DOCKER_HUB_PSW')]) {
-                    script {
-                        // Log in to Docker Hub
-                        sh "echo ${DOCKER_HUB_PSW} | docker login -u ${DOCKER_HUB_USR} --password-stdin"
-
-                        // Push the Docker image
-                        sh "docker push ${DOCKER_IMAGE_NAME}:${env.BUILD_ID}"
-                    }
-                }
+        stage('Push to Docker Hub') {
+    steps {
+        script {
+            docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-credentials') {
+                docker.image("${DOCKER_IMAGE_NAME}:${env.BUILD_ID}").push('latest')
+                docker.image("${DOCKER_IMAGE_NAME}:${env.BUILD_ID}").push("${env.BUILD_ID}")
             }
+        }
+    }
         }
     }
 
