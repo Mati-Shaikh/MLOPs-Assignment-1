@@ -1,7 +1,9 @@
 import requests
 
+
 # Base URL of the Flask app
 BASE_URL = "http://127.0.0.1:5000"
+
 
 def test_predict_endpoint():
     # Test data
