@@ -8,7 +8,8 @@ def client():
     with app.test_client() as client:
         yield client
 
-# Your existing code in test_app.py
+
+# Ensure there are two blank lines before the function definition
 def test_predict_endpoint(client):
     # Test data
     data = {
