@@ -34,5 +34,3 @@ def test_predict_endpoint(client):
     response_data = response.get_json()
     assert "predicted_price" in response_data
     assert isinstance(response_data["predicted_price"], float)
-
-# Add a newline here (ensure the file ends with a blank line)
