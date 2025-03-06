@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     environment {
+        DOCKER_HUB_CREDENTIALS = credentials('docker-hub-credentials') // Use your credential ID
         DOCKER_IMAGE_NAME = 'matishaikh77/mlops-assignment-1'
     }
 
@@ -10,7 +11,7 @@ pipeline {
             steps {
                 script {
                     // Build the Docker image
-                    sh "docker build -t ${DOCKER_IMAGE_NAME}:${env.BUILD_ID} ."
+                    docker.build("${DOCKER_IMAGE_NAME}:${env.BUILD_ID}")
                 }
             }
         }
