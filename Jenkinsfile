@@ -41,11 +41,11 @@ pipeline {
     post {
         success {
             // Send email notification on successful deployment
-            emailext body: 'The deployment was successful!', subject: 'Deployment Notification', to: 'matishaikh7@gmail.com'
+            emailext body: 'The deployment was successful!', subject: 'Deployment Notification', to: 'fypstructify@gmail.com'
         }
         failure {
             // Send email notification on failure
-            emailext body: 'The deployment failed!', subject: 'Deployment Failure Notification', to: 'matishaikh7@gmail.com'
+            emailext body: 'The deployment failed!', subject: 'Deployment Failure Notification', to: 'fypstructify@gmail.com'
         }
     }
 }
