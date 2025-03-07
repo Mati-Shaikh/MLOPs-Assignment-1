@@ -6,6 +6,12 @@ pipeline {
         DOCKER_IMAGE_NAME = 'matishaikh77/mlops-assignment-1'
     }
 
+    triggers {
+        // Trigger the pipeline when there is a push to the master branch
+        pollSCM('H/5 * * * *') // Polls the SCM every 5 minutes for changes
+        // Alternatively, you can use GitHub webhooks or other SCM triggers
+    }
+
     stages {
         stage('Build Docker Image') {
             steps {
@@ -17,14 +23,14 @@ pipeline {
         }
 
         stage('Push to Docker Hub') {
-    steps {
-        script {
-            docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-credentials') {
-                docker.image("${DOCKER_IMAGE_NAME}:${env.BUILD_ID}").push('latest')
-                docker.image("${DOCKER_IMAGE_NAME}:${env.BUILD_ID}").push("${env.BUILD_ID}")
+            steps {
+                script {
+                    docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-credentials') {
+                        docker.image("${DOCKER_IMAGE_NAME}:${env.BUILD_ID}").push('latest')
+                        docker.image("${DOCKER_IMAGE_NAME}:${env.BUILD_ID}").push("${env.BUILD_ID}")
+                    }
+                }
             }
-        }
-    }
         }
     }
 
