@@ -21,7 +21,6 @@ document.getElementById('addCarForm').addEventListener('submit', function (e) {
         });
 });
 
-// Predict Price Form Submission
 document.getElementById('predictPriceForm').addEventListener('submit', function (e) {
     e.preventDefault();
 
